@@ -15,6 +15,7 @@ public class GameLogic : MonoBehaviour
     public Tile currentSelectedTile;
     GameObject selector;
     GameObject directionIndicator;
+    public int ecoCoins;
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +40,10 @@ public class GameLogic : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            PlayTurn();
+            if (PlayTurn() == false)
+            {
+                Debug.Log("Some animals going out of boudns");
+            }
         }
 
         // On left click
@@ -56,9 +60,10 @@ public class GameLogic : MonoBehaviour
 
 
 
-    public void PlayTurn()
+    public bool PlayTurn()
     {
         List<Entity> entities = new List<Entity>();
+        bool turnIsValid = true;
         for (int y = 0; y < Board.SIZE; y++)
         {
             for (int x = 0; x < Board.SIZE; x++)
@@ -68,11 +73,31 @@ public class GameLogic : MonoBehaviour
             }
         }
 
+
+
+        foreach (Entity e in entities)
+        {
+            if (!e.CanDoTurn())
+            {
+                turnIsValid = false;
+            }
+        }
+
+        if (!turnIsValid) return false;
+
         foreach (Entity e in entities)
         {
             e.DoTurn();
         }
 
+        foreach (Entity e in entities)
+        {
+            e.OnTurnEnd();
+        }
+
+        directionIndicator.SetActive(false);
+
+        return true;
     }
 
     void GetAllValues()
@@ -86,7 +111,7 @@ public class GameLogic : MonoBehaviour
         board.BuildBoard();
         board.AddAnimal(3, 3, ANIMAL_TYPE.FOX);
         board.AddEntity(5, 5, ENTITY_TYPE.HOME);
-        
+        ecoCoins = 0;
     }
 
 
@@ -101,7 +126,15 @@ public class GameLogic : MonoBehaviour
             {
                 directionIndicator.SetActive(true);
                 directionIndicator.transform.position = tile.transform.position;
+            }
+        }
 
+        if (tile.GetAnimal() != null)
+        {
+            if (tile.GetAnimal().NeedsDirection())
+            {
+                directionIndicator.SetActive(true);
+                directionIndicator.transform.position = tile.transform.position;
             }
         }
 

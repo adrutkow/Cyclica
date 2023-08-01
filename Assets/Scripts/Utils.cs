@@ -60,7 +60,30 @@ public class Utils : MonoBehaviour
     /// <returns>the offset as an int[]</returns>
     public static int[] GetDirectionOffset(DIRECTION d)
     {
+        if (d == DIRECTION.NONE) return null;
         return new int[] { directionOffsets[(int)d][0], directionOffsets[(int)d][1] };
+    }
+
+    public static int[] GetCoordinatesTorwardsDirection(Animal animal)
+    {
+        return GetCoordinatesTorwardsDirection(animal.x, animal.y, animal.direction);
+    }
+
+    /// <summary>
+    /// Get target coordinates if the entity will head towards given direction
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <param name="direction"></param>
+    /// <returns>int[] with coordinates, null if out of bounds</returns>
+    public static int[] GetCoordinatesTorwardsDirection(int x, int y, DIRECTION direction)
+    {
+        int[] offsetDirection = GetDirectionOffset(direction);
+        if (offsetDirection == null) return null;
+        int targetX = x + offsetDirection[0];
+        int targetY = y + offsetDirection[1];
+        if (IsOutOfBounds(targetX, targetY)) return null;
+        return new int[] { targetX, targetY };
     }
 
 
@@ -70,6 +93,7 @@ public class Utils : MonoBehaviour
         DOWN,
         LEFT,
         RIGHT,
+        NONE,
     }
 
 }

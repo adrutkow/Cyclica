@@ -7,7 +7,8 @@ public class Tile : MonoBehaviour
 {
     public int x;
     public int y;
-    public Utils.DIRECTION direction;
+    public Utils.DIRECTION direction = Utils.DIRECTION.NONE;
+    public bool needsDirection = false;
 
 
     public void SetPosition(int _x, int _y)
@@ -49,6 +50,11 @@ public class Tile : MonoBehaviour
     public Utils.DIRECTION GetDirection()
     {
         return direction;
+    }
+
+    public bool NeedsDirection()
+    {
+        return needsDirection;
     }
 
 

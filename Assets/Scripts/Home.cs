@@ -44,9 +44,9 @@ public class Home : Entity
         return GameLogic.gameLogic.board.GetTileAt(x, y).direction;
     }
 
-    public override bool IsTurnReady()
+    public override bool CanDoTurn()
     {
-        return base.IsTurnReady();
+        return true;
     }
 
 

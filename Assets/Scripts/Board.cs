@@ -72,11 +72,32 @@ public class Board : MonoBehaviour
         RemoveAnimalFromBoard(animal.x, animal.y);
     }
 
+    public bool IsWalkableAt(int[] coords)
+    {
+        if (coords == null) return false;
+        return IsWalkableAt(coords[0], coords[1]);
+    }
+
+    public bool IsWalkableAt(int x, int y)
+    {
+        if (IsOutOfBounds(x, y)) return false;
+        if (GetEntityAt(x, y) != null)
+        {
+            if (!GetEntityAt(x, y).isWalkableOn) return false;
+        }
+
+        return true;
+    }
 
     public void MoveAnimal(int x, int y, Animal animal)
     {
         RemoveAnimalFromBoard(animal);
         PutAnimalOnBoard(x, y, animal);
+    }
+
+    public bool IsOutOfBounds(int[] coords)
+    {
+        return IsOutOfBounds(coords[0], coords[1]);
     }
 
     public bool IsOutOfBounds(int x, int y)

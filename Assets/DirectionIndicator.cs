@@ -6,12 +6,19 @@ public class DirectionIndicator : MonoBehaviour
 {
     public void OnArrowPressed(int directionIndex)
     {
-        GameLogic.gameLogic.currentSelectedTile.SetDirection((Utils.DIRECTION)directionIndex);
-    }
+        Tile tile = GameLogic.gameLogic.currentSelectedTile;
+        Utils.DIRECTION arrowDirection = (Utils.DIRECTION)directionIndex;
 
-    public void test()
-    {
-        print("test");
+        if (tile.GetAnimal() != null)
+        {
+            if (tile.GetAnimal().NeedsDirection())
+            {
+                tile.GetAnimal().SetDirection(arrowDirection);
+            }
+        }
+
+        tile.SetDirection(arrowDirection);
+
     }
 
 }

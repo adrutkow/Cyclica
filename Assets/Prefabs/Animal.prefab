@@ -216,7 +216,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   x: 0
   y: 0
-  walkableOn: 0
+  isWalkableOn: 0
   entityType: 0
   animalType: 0
-  direction: 0
+  direction: 4
