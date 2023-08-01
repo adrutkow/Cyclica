@@ -58,15 +58,21 @@ public class GameLogic : MonoBehaviour
 
     public void PlayTurn()
     {
+        List<Entity> entities = new List<Entity>();
         for (int y = 0; y < Board.SIZE; y++)
         {
             for (int x = 0; x < Board.SIZE; x++)
             {
-                if (board.animalsBoard[x, y] != null) board.animalsBoard[x, y].DoTurn();
-                if (board.entitiesBoard[x, y] != null) board.entitiesBoard[x, y].DoTurn();
-
+                if (board.animalsBoard[x, y] != null) entities.Add(board.animalsBoard[x, y]);
+                if (board.entitiesBoard[x, y] != null) entities.Add(board.entitiesBoard[x, y]);
             }
         }
+
+        foreach (Entity e in entities)
+        {
+            e.DoTurn();
+        }
+
     }
 
     void GetAllValues()

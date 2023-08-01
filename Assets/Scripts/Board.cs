@@ -73,7 +73,6 @@ public class Board : MonoBehaviour
     }
 
 
-
     public void MoveAnimal(int x, int y, Animal animal)
     {
         RemoveAnimalFromBoard(animal);
@@ -88,8 +87,7 @@ public class Board : MonoBehaviour
 
     public bool IsAnimalsBoardSpotOccupied(int x, int y)
     {
-        if (IsOutOfBounds(x, y)) return true;
-        return animalsBoard[x, y] != null;
+        return GetAnimalAt(x, y) != null;
     }
 
     public bool isEntitiesBoardSpotOccupied(int x, int y)

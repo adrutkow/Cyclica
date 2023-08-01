@@ -48,7 +48,7 @@ public class Utils : MonoBehaviour
 
     public static bool IsOutOfBounds(int x, int y)
     {
-        if (x > Board.SIZE || y > Board.SIZE || x < 0 || y < 0) return true;
+        if (x >= Board.SIZE || y >= Board.SIZE || x < 0 || y < 0) return true;
         return false;
     }
 

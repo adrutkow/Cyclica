@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Animal
   - Plant
+  - Tile
+  - Selector
+  - DirectionIndicator
   layers:
   - Default
   - TransparentFX

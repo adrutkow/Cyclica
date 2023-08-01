@@ -18,16 +18,10 @@ public class Animal: Entity
     // Update is called once per frame
     void Update()
     {
-        UpdateHunger();
-        float s = hunger / 100;
-        rangeIndicator.transform.localScale = new Vector3(s, s);
+
     }
 
-    void UpdateHunger()
-    {
-        hunger += Time.deltaTime;
-        if (hunger > 100) hunger = 100;
-    }
+
 
     public override void DoTurn()
     {
