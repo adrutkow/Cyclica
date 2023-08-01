@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class GameLogic : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class GameLogic : MonoBehaviour
     public GameObject[] animalPrefabs;
     public Board board;
     public static GameLogic gameLogic;
+    public Tile currentSelectedTile;
+    GameObject selector;
+    GameObject directionIndicator;
 
     // Start is called before the first frame update
     void Start()
@@ -18,17 +22,51 @@ public class GameLogic : MonoBehaviour
         gameLogic = this;
         GetAllValues();
         InitiateGame();
+        selector = GameObject.FindGameObjectWithTag("Selector");
+        directionIndicator = GameObject.FindGameObjectWithTag("DirectionIndicator");
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        InputManager();
+
 
     }
 
+    private void InputManager()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            PlayTurn();
+        }
+
+        // On left click
+        if (Input.GetMouseButtonDown(0))
+        {
+            RaycastHit2D[] hits = Utils.GetClickedElements("Tile");
+            if (hits.Length > 0)
+            {
+                SelectTile(hits[0].collider.GetComponent<Tile>());
+            }
+        }
+
+    }
+
+
+
     public void PlayTurn()
     {
+        for (int y = 0; y < Board.SIZE; y++)
+        {
+            for (int x = 0; x < Board.SIZE; x++)
+            {
+                if (board.animalsBoard[x, y] != null) board.animalsBoard[x, y].DoTurn();
+                if (board.entitiesBoard[x, y] != null) board.entitiesBoard[x, y].DoTurn();
 
+            }
+        }
     }
 
     void GetAllValues()
@@ -41,11 +79,28 @@ public class GameLogic : MonoBehaviour
     {
         board.BuildBoard();
         board.AddAnimal(3, 3, ANIMAL_TYPE.FOX);
-        board.AddHome(5, 5, ANIMAL_TYPE.SHEEP);
+        board.AddEntity(5, 5, ENTITY_TYPE.HOME);
+        
     }
 
 
+    public void SelectTile(Tile tile)
+    {
+        selector.transform.position = tile.transform.position;
+        currentSelectedTile = tile;
+        directionIndicator.SetActive(false);
+        if (tile.GetEntity() != null)
+        {
+            if (tile.GetEntity().entityType == ENTITY_TYPE.HOME)
+            {
+                directionIndicator.SetActive(true);
+                directionIndicator.transform.position = tile.transform.position;
 
+            }
+        }
+
+
+    }
 
 
 

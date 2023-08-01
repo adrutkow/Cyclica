@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.U2D;
 
 public class CameraScript : MonoBehaviour
 {
@@ -22,8 +23,15 @@ public class CameraScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        cam.orthographicSize -= Input.mouseScrollDelta.y;
+
         if (cam.orthographicSize < 1) cam.orthographicSize = 1;
-        if (cam.orthographicSize > 8) cam.orthographicSize = 8;
+        if (cam.orthographicSize > 14) cam.orthographicSize = 14;
+
+
+        //Debug.Log(cam.GetComponent<PixelPerfectCamera>().pixelRatio);// += Input.mouseScrollDelta.y;
+
 
 
         if (Input.GetMouseButtonDown(0))

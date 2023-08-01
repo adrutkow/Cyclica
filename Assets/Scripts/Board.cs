@@ -8,7 +8,7 @@ public class Board : MonoBehaviour
     public GameObject tile;
     public static int SIZE = 10;
     public Animal[,] animalsBoard = new Animal[SIZE, SIZE];
-    public Entity[,] entitiesBoard = new Animal[SIZE, SIZE];
+    public Entity[,] entitiesBoard = new Entity[SIZE, SIZE];
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +19,7 @@ public class Board : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void BuildBoard()
@@ -34,8 +34,10 @@ public class Board : MonoBehaviour
                 animalsBoard[x, y] = null;
                 entitiesBoard[x, y] = null;
                 GameObject temp = Instantiate(tile);
-                temp.transform.position = new Vector3(x * 2.5f, y * 2.5f);
-                temp.transform.parent = parent;
+                Tile tempTile = temp.GetComponent<Tile>();
+                tempTile.transform.position = new Vector3(x * 2, y * 2);
+                tempTile.transform.parent = parent;
+                tempTile.SetPosition(x, y);
                 if (i % 2 == 0) temp.GetComponent<SpriteRenderer>().color = Color.green;
                 i++;
             }
@@ -47,8 +49,36 @@ public class Board : MonoBehaviour
     {
         if (IsOutOfBounds(x, y)) return;
         animalsBoard[x, y] = animal;
+        animal.x = x;
+        animal.y = y;
+        animal.UpdateVisualPosition();
     }
 
+    public void PutEntityOnBoard(int x, int y, Entity entity)
+    {
+        if (IsOutOfBounds(x, y)) return;
+        entitiesBoard[x, y] = entity;
+    }
+
+
+    public void RemoveAnimalFromBoard(int x, int y)
+    {
+        if (IsOutOfBounds(x, y)) return;
+        animalsBoard[x, y] = null;
+    }
+
+    public void RemoveAnimalFromBoard(Animal animal)
+    {
+        RemoveAnimalFromBoard(animal.x, animal.y);
+    }
+
+
+
+    public void MoveAnimal(int x, int y, Animal animal)
+    {
+        RemoveAnimalFromBoard(animal);
+        PutAnimalOnBoard(x, y, animal);
+    }
 
     public bool IsOutOfBounds(int x, int y)
     {
@@ -75,25 +105,46 @@ public class Board : MonoBehaviour
 
         GameObject newAnimalGO = Instantiate(GameLogic.gameLogic.animalPrefabs[(int)animalType]);
         Animal newAnimal = newAnimalGO.GetComponent<Animal>();
-        newAnimalGO.transform.position = new Vector3(x * 2.5f, y * 2.5f, 0);
-        newAnimal.x = x;
-        newAnimal.y = y;
         PutAnimalOnBoard(x, y, newAnimal);
         return newAnimal;
     }
 
-    public Home AddHome(int x, int y, ANIMAL_TYPE animalType)
+    public Entity AddEntity(int x, int y, ENTITY_TYPE entityType)
     {
         if (isEntitiesBoardSpotOccupied(x, y)) return null;
 
 
-        GameObject newHomeGO = Instantiate(GameLogic.gameLogic.entityPrefabs[0]);
-        Home newHome = newHomeGO.GetComponent<Home>();
-        newHomeGO.transform.position = new Vector3(x * 2.5f, y * 2.5f, 0);
-        newHome.x = x;
-        newHome.y = y;
+        GameObject newEntityGO = Instantiate(GameLogic.gameLogic.entityPrefabs[(int)entityType]);
+        Entity newEntity = newEntityGO.GetComponent<Entity>();
+        newEntityGO.transform.position = new Vector3(x * 2, y * 2, 0);
+        newEntity.x = x;
+        newEntity.y = y;
+        PutEntityOnBoard(x, y, newEntity);
+        return newEntity;
+    }
 
-        return newHome;
+    public Animal GetAnimalAt(int x, int y)
+    {
+        if (Utils.IsOutOfBounds(x, y)) return null;
+        return animalsBoard[x, y];
+    }
+
+    public Entity GetEntityAt(int x, int y)
+    {
+        if (Utils.IsOutOfBounds(x, y)) return null;
+        return entitiesBoard[x, y];
+    }
+
+    public Tile GetTileAt(int _x, int _y)
+    {
+        foreach (GameObject g in GameObject.FindGameObjectsWithTag("Tile"))
+        {
+            if (g.GetComponent<Tile>().x == _x && g.GetComponent<Tile>().y == _y)
+            {
+                return g.GetComponent<Tile>();
+            }
+        }
+        return null;
     }
 
 }
