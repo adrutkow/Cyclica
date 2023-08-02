@@ -14,6 +14,12 @@ public class DirectionIndicator : MonoBehaviour
             if (tile.GetAnimal().NeedsDirection())
             {
                 tile.GetAnimal().SetDirection(arrowDirection);
+
+                if (tile.GetAnimal().isWild)
+                {
+                    tile.GetAnimal().isWild = false;
+                    return;
+                }
             }
         }
 

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Animal: Entity
 {
     public ANIMAL_TYPE animalType;
+    public bool isWild = true;
 
 
     // Start is called before the first frame update

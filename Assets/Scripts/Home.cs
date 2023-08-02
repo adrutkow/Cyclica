@@ -46,7 +46,17 @@ public class Home : Entity
 
     public override bool CanDoTurn()
     {
-        return true;
+        return !NeedsDirection();
+    }
+
+    public bool NeedsDirection()
+    {
+        Utils.DIRECTION tileDirection = GameLogic.gameLogic.board.GetTileAt(x, y).GetDirection();
+        if (tileDirection != Utils.DIRECTION.NONE)
+        {
+            direction = tileDirection;
+        }
+        return direction == Utils.DIRECTION.NONE;
     }
 
 

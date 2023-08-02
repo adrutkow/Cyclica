@@ -45,6 +45,11 @@ public class Tile : MonoBehaviour
     public void SetDirection(Utils.DIRECTION d)
     {
         direction = d;
+        Transform arrowChild = transform.GetChild(0);
+        arrowChild.gameObject.SetActive(true);
+
+        arrowChild.transform.eulerAngles = new Vector3(0, 0, Utils.DIRECTION_ROTATION_DEGREES[(int)d]);
+        if (direction == Utils.DIRECTION.NONE) arrowChild.gameObject.SetActive(false);
     }
 
     public Utils.DIRECTION GetDirection()

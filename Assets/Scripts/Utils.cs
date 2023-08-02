@@ -96,4 +96,14 @@ public class Utils : MonoBehaviour
         NONE,
     }
 
+    public static int[] DIRECTION_ROTATION_DEGREES = new int[5]
+    {
+        90,
+        270,
+        180,
+        0,
+        0
+    };
+
+
 }

@@ -46,6 +46,7 @@ public class Entity : MonoBehaviour
     public virtual void SetDirection(Utils.DIRECTION d)
     {
         direction = d;
+        needsDirection = false;
     }
 
     public virtual Tile GetTile()

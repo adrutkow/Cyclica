@@ -218,5 +218,7 @@ MonoBehaviour:
   y: 0
   isWalkableOn: 0
   entityType: 0
-  animalType: 0
   direction: 4
+  needsDirection: 0
+  animalType: 0
+  isWild: 1
