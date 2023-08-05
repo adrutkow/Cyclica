@@ -16,6 +16,9 @@ public class GameLogic : MonoBehaviour
     GameObject selector;
     GameObject directionIndicator;
     public int ecoCoins;
+    public int turnCount = 0;
+    PlayerUI playerUI;
+    public GameObject notificationArrow;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +28,7 @@ public class GameLogic : MonoBehaviour
         InitiateGame();
         selector = GameObject.FindGameObjectWithTag("Selector");
         directionIndicator = GameObject.FindGameObjectWithTag("DirectionIndicator");
-
+        playerUI = GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<PlayerUI>();
     }
 
     // Update is called once per frame
@@ -42,8 +45,11 @@ public class GameLogic : MonoBehaviour
         {
             if (PlayTurn() == false)
             {
-                Debug.Log("Some animals going out of boudns");
+                playerUI.WarningPopup();
+                return;
             }
+            turnCount++;
+
         }
 
         // On left click
@@ -80,6 +86,8 @@ public class GameLogic : MonoBehaviour
             if (!e.CanDoTurn())
             {
                 turnIsValid = false;
+                Instantiate(notificationArrow, e.transform);
+
             }
         }
 
@@ -111,6 +119,8 @@ public class GameLogic : MonoBehaviour
         board.BuildBoard();
         board.AddAnimal(3, 3, ANIMAL_TYPE.FOX);
         board.AddEntity(5, 5, ENTITY_TYPE.HOME);
+        board.AddEntity(8, 5, ENTITY_TYPE.TREE);
+        board.AddEntity(2, 5, ENTITY_TYPE.GRASS_PATCH);
         ecoCoins = 0;
     }
 
@@ -124,8 +134,11 @@ public class GameLogic : MonoBehaviour
         {
             if (tile.GetEntity().entityType == ENTITY_TYPE.HOME)
             {
-                directionIndicator.SetActive(true);
-                directionIndicator.transform.position = tile.transform.position;
+                if (tile.GetEntity().GetComponent<Home>().isFirstTurn)
+                {
+                    directionIndicator.SetActive(true);
+                    directionIndicator.transform.position = tile.transform.position;
+                }
             }
         }
 
@@ -136,9 +149,21 @@ public class GameLogic : MonoBehaviour
                 directionIndicator.SetActive(true);
                 directionIndicator.transform.position = tile.transform.position;
             }
+
+            if (tile.GetAnimal().isWild)
+            {
+                directionIndicator.SetActive(true);
+                directionIndicator.transform.position = tile.transform.position;
+            }
         }
 
 
+    }
+
+
+    public void AddMoney(int amount)
+    {
+        ecoCoins += amount;
     }
 
 

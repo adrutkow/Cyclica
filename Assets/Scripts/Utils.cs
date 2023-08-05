@@ -16,7 +16,6 @@ public class Utils : MonoBehaviour
     {
         Camera cam = Camera.main;
         RaycastHit2D[] hits = Physics2D.RaycastAll((Vector2)cam.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-        print(hits.Length);
 
         if (tag == null) return hits;
 

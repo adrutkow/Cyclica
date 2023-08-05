@@ -11,6 +11,34 @@ PrefabInstance:
       propertyPath: animalType
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4079519709351557453, guid: 1544f5a0906e0a14e9dd2719ea7df136, type: 3}
+      propertyPath: FavorEatenReward
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: -4079519709351557453, guid: 1544f5a0906e0a14e9dd2719ea7df136, type: 3}
+      propertyPath: UnfavorEatenReward
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -4079519709351557453, guid: 1544f5a0906e0a14e9dd2719ea7df136, type: 3}
+      propertyPath: animalLovesEating.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4079519709351557453, guid: 1544f5a0906e0a14e9dd2719ea7df136, type: 3}
+      propertyPath: entityHatesEating.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4079519709351557453, guid: 1544f5a0906e0a14e9dd2719ea7df136, type: 3}
+      propertyPath: entityLovesEating.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4079519709351557453, guid: 1544f5a0906e0a14e9dd2719ea7df136, type: 3}
+      propertyPath: entityHatesEating.Array.data[0]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -4079519709351557453, guid: 1544f5a0906e0a14e9dd2719ea7df136, type: 3}
+      propertyPath: entityLovesEating.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5527370226668544547, guid: 1544f5a0906e0a14e9dd2719ea7df136, type: 3}
       propertyPath: m_RootOrder
       value: 0

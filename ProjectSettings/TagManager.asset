@@ -9,6 +9,8 @@ TagManager:
   - Tile
   - Selector
   - DirectionIndicator
+  - PlayerUI
+  - NotificationArrow
   layers:
   - Default
   - TransparentFX

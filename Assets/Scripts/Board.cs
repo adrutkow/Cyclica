@@ -38,7 +38,7 @@ public class Board : MonoBehaviour
                 tempTile.transform.position = new Vector3(x * 2, y * 2);
                 tempTile.transform.parent = parent;
                 tempTile.SetPosition(x, y);
-                if (i % 2 == 0) temp.GetComponent<SpriteRenderer>().color = Color.green;
+                if (i % 2 == 0) temp.GetComponent<SpriteRenderer>().color = Color.gray;
                 i++;
             }
 
@@ -64,12 +64,26 @@ public class Board : MonoBehaviour
     public void RemoveAnimalFromBoard(int x, int y)
     {
         if (IsOutOfBounds(x, y)) return;
+        if (animalsBoard[x, y] == null) return;
         animalsBoard[x, y] = null;
     }
+
 
     public void RemoveAnimalFromBoard(Animal animal)
     {
         RemoveAnimalFromBoard(animal.x, animal.y);
+    }
+
+    public void RemoveEntityFromBoard(int x, int y)
+    {
+        if (IsOutOfBounds(x, y)) return;
+        entitiesBoard[x, y] = null;
+    }
+
+
+    public void RemoveEntityFromBoard(Entity entity)
+    {
+        RemoveEntityFromBoard(entity.x, entity.y);
     }
 
     public bool IsWalkableAt(int[] coords)

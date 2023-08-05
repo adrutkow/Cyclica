@@ -5,6 +5,7 @@ using UnityEngine;
 public class Home : Entity
 {
     Animal outInWild;
+    public bool isFirstTurn = true;
 
     // Start is called before the first frame update
     void Start()
@@ -26,16 +27,22 @@ public class Home : Entity
             int directonOffsetX = directionOffset[0];
             int directonOffsetY = directionOffset[1];
 
-            if (GameLogic.gameLogic.board.IsAnimalsBoardSpotOccupied(x + directonOffsetX, y + directonOffsetY)) return;
-            Animal newAnimal = GameLogic.gameLogic.board.AddAnimal(x + directonOffsetX, y + directonOffsetY, ANIMAL_TYPE.SHEEP);
+            //if (GameLogic.gameLogic.board.IsAnimalsBoardSpotOccupied(x + directonOffsetX, y + directonOffsetY)) return;
+            //Animal newAnimal = GameLogic.gameLogic.board.AddAnimal(x + directonOffsetX, y + directonOffsetY, ANIMAL_TYPE.SHEEP);
+            
+            if (GameLogic.gameLogic.board.IsAnimalsBoardSpotOccupied(x + 0, y + 0)) return;
+            Animal newAnimal = GameLogic.gameLogic.board.AddAnimal(x + 0, y + 0, ANIMAL_TYPE.SHEEP);
+
             if (newAnimal != null) outInWild = newAnimal;
             newAnimal.direction = GetDirection();
+            newAnimal.SetHome(this);
         }
     }
 
     public override void DoTurn()
     {
         SendAnimal();
+        isFirstTurn = false;
     }
 
     public Utils.DIRECTION GetDirection()
