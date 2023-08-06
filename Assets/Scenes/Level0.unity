@@ -1723,7 +1723,7 @@ GameObject:
   - component: {fileID: 1327086906}
   - component: {fileID: 1327086905}
   - component: {fileID: 1327086904}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1809,8 +1809,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1100, y: 535}
+  m_AnchoredPosition: {x: 1, y: -1}
+  m_SizeDelta: {x: 1113, y: 592}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1333526736
 GameObject:
@@ -1864,7 +1864,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2286,8 +2286,8 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 26.77}
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2744,9 +2744,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1327086907}
     m_Modifications:
+    - target: {fileID: 106646212559412505, guid: baa5503a29a130c4fb974943e538a05d, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 106646213271442562, guid: baa5503a29a130c4fb974943e538a05d, type: 3}
       propertyPath: m_Name
       value: DirectionSelector
+      objectReference: {fileID: 0}
+    - target: {fileID: 106646213271442562, guid: baa5503a29a130c4fb974943e538a05d, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 106646213271442563, guid: baa5503a29a130c4fb974943e538a05d, type: 3}
       propertyPath: m_RootOrder
@@ -2803,6 +2811,22 @@ PrefabInstance:
     - target: {fileID: 106646213271442563, guid: baa5503a29a130c4fb974943e538a05d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8959382466952552638, guid: baa5503a29a130c4fb974943e538a05d, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8959382467660577312, guid: baa5503a29a130c4fb974943e538a05d, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8959382467753872737, guid: baa5503a29a130c4fb974943e538a05d, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8959382467854222740, guid: baa5503a29a130c4fb974943e538a05d, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: baa5503a29a130c4fb974943e538a05d, type: 3}
@@ -2926,7 +2950,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
