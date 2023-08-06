@@ -81,5 +81,6 @@ public enum ENTITY_TYPE
     HOME,
     GRASS_PATCH,
     CARROT_PATCH,
-    TREE
+    TREE,
+    ROCK
 }

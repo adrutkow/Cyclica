@@ -305,9 +305,12 @@ MonoBehaviour:
   entityType: 0
   direction: 4
   needsDirection: 0
+  FavorEatenReward: 10
+  UnfavorEatenReward: 10
   animalType: 0
   isWild: 1
   animalLovesEating: 
   animalHatesEating: 
   entityLovesEating: 
   entityHatesEating: 
+  defaultStarveTime: 32

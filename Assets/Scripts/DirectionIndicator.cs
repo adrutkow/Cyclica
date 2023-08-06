@@ -9,6 +9,12 @@ public class DirectionIndicator : MonoBehaviour
         Tile tile = GameLogic.gameLogic.currentSelectedTile;
         Utils.DIRECTION arrowDirection = (Utils.DIRECTION)directionIndex;
 
+        if (!GameLogic.gameLogic.board.IsWalkableAt(Utils.GetCoordinatesTorwardsDirection(tile.x, tile.y, arrowDirection)))
+        {
+            print("unwalkable there");
+            return;
+        }
+
         if (tile.GetAnimal() != null)
         {
             if (tile.GetAnimal().isWild)

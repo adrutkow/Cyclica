@@ -15,7 +15,8 @@ public class Animal: Entity
     public List<ENTITY_TYPE> entityLovesEating;
     public List<ENTITY_TYPE> entityHatesEating;
     Home home;
-    public int defaultStarveTime = 24;
+    public int defaultStarveTime = 32;
+    public int eatenAmount = 0;
     int starveTime;
 
 
@@ -46,7 +47,6 @@ public class Animal: Entity
             return false;
         }
 
-
         return true;
     }
 
@@ -57,6 +57,10 @@ public class Animal: Entity
         int targetY = targetCoords[1];
 
         starveTime--;
+        if (starveTime < 0)
+        {
+            Starve();
+        }
 
         if (Utils.IsOutOfBounds(targetX, targetY)) return;
         if (GameLogic.gameLogic.board.IsAnimalsBoardSpotOccupied(targetX, targetY)) return;
@@ -73,8 +77,31 @@ public class Animal: Entity
             NeedsDirection();
         }
 
-        TryEat();
+        CheckIfSteppedIntoOwnHome();
 
+        TryEat();
+    }
+
+    public void CheckIfSteppedIntoOwnHome()
+    {
+        Entity currentEntity = GameLogic.gameLogic.board.GetEntityAt(x, y);
+
+        if (currentEntity != null)
+        {
+            if (currentEntity.entityType == ENTITY_TYPE.HOME)
+            {
+                if (currentEntity.GetComponent<Home>() == home)
+                {
+                    Kill();
+                }
+            }
+        }
+    }
+
+    public void Starve()
+    {
+        Kill();
+        GameLogic.gameLogic.AddMoney(-500);
     }
 
     public void TryEat()
@@ -149,9 +176,8 @@ public class Animal: Entity
             if (toBeEaten.TryGetComponent(out plant))
             {
                 if (plant.isCut) return;
+                EatEntity(toBeEaten);
             }
-            EatEntity(toBeEaten);
-
         }
         return;
 
@@ -188,8 +214,11 @@ public class Animal: Entity
             GameLogic.gameLogic.AddMoney(animal.UnfavorEatenReward);
         }
 
+
+        eatenAmount++;
         GameLogic.gameLogic.board.RemoveAnimalFromBoard(animal);
         print(animalType.ToString() + " ate " + animal.animalType.ToString());
+        starveTime = defaultStarveTime;
     }
 
     public void EatEntity(Entity entity)
@@ -204,6 +233,9 @@ public class Animal: Entity
         {
             GameLogic.gameLogic.AddMoney(entity.UnfavorEatenReward);
         }
+
+        eatenAmount++;
+        starveTime = defaultStarveTime;
 
         NeedsDirection();
         //GameLogic.gameLogic.board.RemoveEntityFromBoard(entity);
@@ -242,6 +274,20 @@ public class Animal: Entity
     public void SetHome(Home h)
     {
         home = h;
+    }
+
+    public override void Kill()
+    {
+        if (eatenAmount == 0)
+        {
+            if (home != null)
+            {
+                home.LoseHealth();
+            }
+        }
+
+
+        base.Kill();
     }
 
 }

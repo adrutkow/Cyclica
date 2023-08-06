@@ -85,7 +85,6 @@ public class Utils : MonoBehaviour
         return new int[] { targetX, targetY };
     }
 
-
     public enum DIRECTION
     {
         UP,
@@ -103,6 +102,4 @@ public class Utils : MonoBehaviour
         0,
         0
     };
-
-
 }

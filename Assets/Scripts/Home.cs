@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using UnityEngine;
 
 public class Home : Entity
 {
     Animal outInWild;
     public bool isFirstTurn = true;
+    public HealthBar healthBar;
 
     // Start is called before the first frame update
     void Start()
@@ -64,6 +66,18 @@ public class Home : Entity
             direction = tileDirection;
         }
         return direction == Utils.DIRECTION.NONE;
+    }
+
+    public void LoseHealth()
+    {
+        healthBar.health--;
+        healthBar.UpdateHealth();
+        
+        if (healthBar.health <= 0)
+        {
+            Kill();
+        }
+
     }
 
 

@@ -43,13 +43,7 @@ public class GameLogic : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (PlayTurn() == false)
-            {
-                playerUI.WarningPopup();
-                return;
-            }
-            turnCount++;
-
+            TryPlayTurn();
         }
 
         // On left click
@@ -65,7 +59,15 @@ public class GameLogic : MonoBehaviour
     }
 
 
-
+    public void TryPlayTurn()
+    {
+        if (PlayTurn() == false)
+        {
+            playerUI.WarningPopup();
+            return;
+        }
+        turnCount++;
+    }
     public bool PlayTurn()
     {
         List<Entity> entities = new List<Entity>();
@@ -114,14 +116,29 @@ public class GameLogic : MonoBehaviour
         board = t.GetComponent<Board>();
     }
 
-    void InitiateGame()
+    public void InitiateGame()
+    {
+        ecoCoins = 0;
+        BuildLevel0();
+    }
+
+    void BuildLevel0()
+    {
+        board.BuildBoard(5);
+        board.AddEntity(4, 0, ENTITY_TYPE.HOME);
+        board.AddEntity(1, 2, ENTITY_TYPE.ROCK);
+        board.AddEntity(4, 3, ENTITY_TYPE.TREE);
+        board.AddEntity(1, 0, ENTITY_TYPE.GRASS_PATCH);
+        board.AddAnimal(0, 4, ANIMAL_TYPE.WOLF);
+    }
+
+    void BuildLevel1()
     {
         board.BuildBoard();
         board.AddAnimal(3, 3, ANIMAL_TYPE.FOX);
-        board.AddEntity(5, 5, ENTITY_TYPE.HOME);
+        board.AddEntity(5, 5, ENTITY_TYPE.GRASS_PATCH);
         board.AddEntity(8, 5, ENTITY_TYPE.TREE);
         board.AddEntity(2, 5, ENTITY_TYPE.GRASS_PATCH);
-        ecoCoins = 0;
     }
 
 

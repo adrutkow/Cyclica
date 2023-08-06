@@ -22,13 +22,14 @@ public class Board : MonoBehaviour
 
     }
 
-    public void BuildBoard()
+    public void BuildBoard(int s=10)
     {
+        SIZE = s;
         int i = 0;
         Transform parent = transform.GetChild(0);
         for (int y = 0; y < SIZE; y++)
         {
-            i++;
+            if (SIZE % 2 == 0)i++;
             for (int x = 0; x < SIZE; x++)
             {
                 animalsBoard[x, y] = null;

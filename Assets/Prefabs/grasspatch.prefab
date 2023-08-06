@@ -226,7 +226,7 @@ MonoBehaviour:
   defaultSprite: {fileID: 4940341971758809325}
   eatenSprite: {fileID: 6362713478164780143}
   isCut: 0
-  growTime: 8
+  growTime: 10
 --- !u!1 &6124736725429804132
 GameObject:
   m_ObjectHideFlags: 0
