@@ -23,10 +23,18 @@ public class DirectionIndicator : MonoBehaviour
                 return;
             }
 
+            if (tile.isChoosingDirectionThisTurn)
+            {
+                tile.SetDirection(arrowDirection);
+                tile.GetAnimal().SetDirection(arrowDirection);
+            }
+
             if (tile.GetAnimal().NeedsDirection())
             {
                 tile.GetAnimal().SetDirection(arrowDirection);
             }
+
+
         }
 
         tile.SetDirection(arrowDirection);

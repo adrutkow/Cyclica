@@ -8,6 +8,7 @@ public class Tile : MonoBehaviour
     public int y;
     public Utils.DIRECTION direction = Utils.DIRECTION.NONE;
     public bool needsDirection = false;
+    public bool isChoosingDirectionThisTurn = false;
 
 
     public void SetPosition(int _x, int _y)

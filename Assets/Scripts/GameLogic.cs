@@ -56,6 +56,12 @@ public class GameLogic : MonoBehaviour
             }
         }
 
+        if (Input.GetMouseButtonDown(1))
+        {
+            int s = (int)Board.SIZE / 2;
+            Camera.main.transform.position = new Vector3(s * 2, s * 2, -10);
+        }
+
     }
 
 
@@ -97,6 +103,7 @@ public class GameLogic : MonoBehaviour
 
         foreach (Entity e in entities)
         {
+            e.GetTile().isChoosingDirectionThisTurn = false;
             e.DoTurn();
         }
 
@@ -162,6 +169,13 @@ public class GameLogic : MonoBehaviour
         if (tile.GetAnimal() != null)
         {
             if (tile.GetAnimal().NeedsDirection())
+            {
+                directionIndicator.SetActive(true);
+                directionIndicator.transform.position = tile.transform.position;
+                tile.isChoosingDirectionThisTurn = true;
+            }
+
+            if (tile.isChoosingDirectionThisTurn)
             {
                 directionIndicator.SetActive(true);
                 directionIndicator.transform.position = tile.transform.position;

@@ -176,7 +176,12 @@ public class Animal: Entity
             if (toBeEaten.TryGetComponent(out plant))
             {
                 if (plant.isCut) return;
-                EatEntity(toBeEaten);
+
+                if (entityLovesEating.Contains(plant.entityType))
+                {
+                    EatEntity(toBeEaten);
+                }
+
             }
         }
         return;
