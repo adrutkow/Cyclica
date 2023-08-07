@@ -54,7 +54,7 @@ public class Entity : MonoBehaviour
 
     public virtual void UpdateVisualPosition()
     {
-        transform.position = new Vector3(x * 2, y * 2);
+        transform.position = new Vector3(x, y);
     }
 
     public virtual void SetDirection(Utils.DIRECTION d)

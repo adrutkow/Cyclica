@@ -11,6 +11,7 @@ TagManager:
   - DirectionIndicator
   - PlayerUI
   - NotificationArrow
+  - DirectionWheel
   layers:
   - Default
   - TransparentFX

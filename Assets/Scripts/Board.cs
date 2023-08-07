@@ -36,7 +36,7 @@ public class Board : MonoBehaviour
                 entitiesBoard[x, y] = null;
                 GameObject temp = Instantiate(tile);
                 Tile tempTile = temp.GetComponent<Tile>();
-                tempTile.transform.position = new Vector3(x * 2, y * 2);
+                tempTile.transform.position = new Vector3(x, y);
                 tempTile.transform.parent = parent;
                 tempTile.SetPosition(x, y);
                 if (i % 2 == 0) temp.GetComponent<SpriteRenderer>().color = Color.gray;
@@ -150,7 +150,7 @@ public class Board : MonoBehaviour
 
         GameObject newEntityGO = Instantiate(GameLogic.gameLogic.entityPrefabs[(int)entityType]);
         Entity newEntity = newEntityGO.GetComponent<Entity>();
-        newEntityGO.transform.position = new Vector3(x * 2, y * 2, 0);
+        newEntityGO.transform.position = new Vector3(x, y, 0);
         newEntity.x = x;
         newEntity.y = y;
         PutEntityOnBoard(x, y, newEntity);

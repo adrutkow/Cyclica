@@ -9,6 +9,8 @@ public class Tile : MonoBehaviour
     public Utils.DIRECTION direction = Utils.DIRECTION.NONE;
     public bool needsDirection = false;
     public bool isChoosingDirectionThisTurn = false;
+    public GameObject[] directionArrows;
+    public SpriteRenderer tileNoiseSprite;
 
 
     public void SetPosition(int _x, int _y)

@@ -14,7 +14,7 @@ public class GameLogic : MonoBehaviour
     public static GameLogic gameLogic;
     public Tile currentSelectedTile;
     GameObject selector;
-    GameObject directionIndicator;
+    DirectionWheel directionWheel;
     public int ecoCoins;
     public int turnCount = 0;
     PlayerUI playerUI;
@@ -27,7 +27,7 @@ public class GameLogic : MonoBehaviour
         GetAllValues();
         InitiateGame();
         selector = GameObject.FindGameObjectWithTag("Selector");
-        directionIndicator = GameObject.FindGameObjectWithTag("DirectionIndicator");
+        directionWheel = GameObject.FindGameObjectWithTag("DirectionWheel").GetComponent<DirectionWheel>();
         playerUI = GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<PlayerUI>();
     }
 
@@ -46,24 +46,39 @@ public class GameLogic : MonoBehaviour
             TryPlayTurn();
         }
 
-        // On left click
         if (Input.GetMouseButtonDown(0))
         {
-            RaycastHit2D[] hits = Utils.GetClickedElements("Tile");
-            if (hits.Length > 0)
-            {
-                SelectTile(hits[0].collider.GetComponent<Tile>());
-            }
+            OnLeftClick();
         }
 
         if (Input.GetMouseButtonDown(1))
         {
-            int s = (int)Board.SIZE / 2;
-            Camera.main.transform.position = new Vector3(s * 2, s * 2, -10);
+            OnRightClick();
         }
 
     }
 
+    void OnLeftClick()
+    {
+        if (directionWheel.gameObject.activeSelf)
+        {
+            directionWheel.OnClicked();
+            return;
+        }
+
+
+        RaycastHit2D[] hits = Utils.GetClickedElements("Tile");
+        if (hits.Length > 0)
+        {
+            SelectTile(hits[0].collider.GetComponent<Tile>());
+        }
+    }
+
+    void OnRightClick()
+    {
+        int s = (int)Board.SIZE / 2;
+        Camera.main.transform.position = new Vector3(s, s, -10);
+    }
 
     public void TryPlayTurn()
     {
@@ -112,7 +127,7 @@ public class GameLogic : MonoBehaviour
             e.OnTurnEnd();
         }
 
-        directionIndicator.SetActive(false);
+        directionWheel.Hide();
 
         return true;
     }
@@ -151,17 +166,16 @@ public class GameLogic : MonoBehaviour
 
     public void SelectTile(Tile tile)
     {
-        selector.transform.position = tile.transform.position;
         currentSelectedTile = tile;
-        directionIndicator.SetActive(false);
+        directionWheel.Hide();
+
         if (tile.GetEntity() != null)
         {
             if (tile.GetEntity().entityType == ENTITY_TYPE.HOME)
             {
                 if (tile.GetEntity().GetComponent<Home>().isFirstTurn)
                 {
-                    directionIndicator.SetActive(true);
-                    directionIndicator.transform.position = tile.transform.position;
+                    directionWheel.MoveToTile(tile);
                 }
             }
         }
@@ -170,21 +184,18 @@ public class GameLogic : MonoBehaviour
         {
             if (tile.GetAnimal().NeedsDirection())
             {
-                directionIndicator.SetActive(true);
-                directionIndicator.transform.position = tile.transform.position;
+                directionWheel.MoveToTile(tile);
                 tile.isChoosingDirectionThisTurn = true;
             }
 
             if (tile.isChoosingDirectionThisTurn)
             {
-                directionIndicator.SetActive(true);
-                directionIndicator.transform.position = tile.transform.position;
+                directionWheel.MoveToTile(tile);
             }
 
             if (tile.GetAnimal().isWild)
             {
-                directionIndicator.SetActive(true);
-                directionIndicator.transform.position = tile.transform.position;
+                directionWheel.MoveToTile(tile);
             }
         }
 
