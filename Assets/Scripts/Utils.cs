@@ -8,6 +8,7 @@ public class Utils : MonoBehaviour
     public static int[][] directionOffsets = { new int[] { 0, 1 }, new int[] { 0, -1 }, new int[] { -1, 0 }, new int[] { 1, 0 } };
     public static float PIXEL_SIZE = 0.0625f;
 
+
     void Start()
     {
         utils = this;

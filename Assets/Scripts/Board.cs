@@ -38,8 +38,8 @@ public class Board : MonoBehaviour
                 Tile tempTile = temp.GetComponent<Tile>();
                 tempTile.transform.position = new Vector3(x, y);
                 tempTile.transform.parent = parent;
+                tempTile.type = i % 2;
                 tempTile.SetPosition(x, y);
-                if (i % 2 == 0) temp.GetComponent<SpriteRenderer>().color = Color.gray;
                 i++;
             }
 

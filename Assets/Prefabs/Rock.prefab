@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3047055720018193464}
   - component: {fileID: 5583632871007487139}
+  - component: {fileID: 949477577993028057}
   m_Layer: 0
   m_Name: Rock
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 539334801373020673}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4611626513917537509}
@@ -54,6 +55,17 @@ MonoBehaviour:
   needsDirection: 0
   FavorEatenReward: 10
   UnfavorEatenReward: 10
+--- !u!210 &949477577993028057
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 539334801373020673}
+  m_Enabled: 1
+  m_SortingLayerID: 1185307443
+  m_SortingLayer: -2
+  m_SortingOrder: 0
 --- !u!1 &580818513002096077
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,7 +139,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d65ba8383632afc42b8c16be098bb7d5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6c74cd5835970964284445d2adb83ed1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -163,7 +175,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6832558627614620879}
   m_LocalRotation: {x: 0.35355338, y: 0.35355338, z: -0.1464466, w: 0.8535535}
-  m_LocalPosition: {x: 0.3467, y: -0.3309, z: 0}
+  m_LocalPosition: {x: 0.143, y: -0.127, z: 0.072}
   m_LocalScale: {x: 1.5, y: 0.5966, z: 1.0839}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -211,7 +223,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: d65ba8383632afc42b8c16be098bb7d5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6c74cd5835970964284445d2adb83ed1, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 0.50980395}
   m_FlipX: 0
   m_FlipY: 0

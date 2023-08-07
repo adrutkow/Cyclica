@@ -46,12 +46,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: BOT
-    uniqueID: 3700836901
+  - name: Tiles
+    uniqueID: 1964900607
+    locked: 0
+  - name: Entities
+    uniqueID: 1185307443
+    locked: 0
+  - name: Arrows
+    uniqueID: 3757075573
     locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: TOP
-    uniqueID: 4283988585
+  - name: UI
+    uniqueID: 3821889783
     locked: 0

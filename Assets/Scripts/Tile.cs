@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
+    public int type = 0;
     public int x;
     public int y;
     public Utils.DIRECTION direction = Utils.DIRECTION.NONE;
@@ -12,6 +13,26 @@ public class Tile : MonoBehaviour
     public GameObject[] directionArrows;
     public SpriteRenderer tileNoiseSprite;
 
+
+    private void Start()
+    {
+        Sprite sprite = GameLogic.gameLogic.TILE_SPRITE[type];
+        int r = Random.Range(0, 2);
+        Sprite noise_sprite = GameLogic.gameLogic.TILE_NOISE_SPRITE_0[0];
+
+        if (type == 0)
+        {
+            noise_sprite = GameLogic.gameLogic.TILE_NOISE_SPRITE_0[r];
+        }
+
+        if (type == 1)
+        {
+            noise_sprite = GameLogic.gameLogic.TILE_NOISE_SPRITE_1[r];
+        }
+
+        GetComponent<SpriteRenderer>().sprite = sprite;
+        tileNoiseSprite.sprite = noise_sprite;
+    }
 
     public void SetPosition(int _x, int _y)
     {
@@ -47,11 +68,12 @@ public class Tile : MonoBehaviour
     public void SetDirection(Utils.DIRECTION d)
     {
         direction = d;
-        Transform arrowChild = transform.GetChild(0);
-        arrowChild.gameObject.SetActive(true);
-
-        arrowChild.transform.eulerAngles = new Vector3(0, 0, Utils.DIRECTION_ROTATION_DEGREES[(int)d]);
-        if (direction == Utils.DIRECTION.NONE) arrowChild.gameObject.SetActive(false);
+        foreach(GameObject arrow in directionArrows)
+        {
+            arrow.SetActive(false);
+        }
+        if (d == Utils.DIRECTION.NONE) return;
+        directionArrows[(int)d].SetActive(true);
     }
 
     public Utils.DIRECTION GetDirection()

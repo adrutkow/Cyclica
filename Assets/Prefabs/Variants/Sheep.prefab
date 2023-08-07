@@ -39,9 +39,33 @@ PrefabInstance:
       propertyPath: entityLovesEating.Array.data[0]
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 704983721569038787, guid: 1544f5a0906e0a14e9dd2719ea7df136, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1712881628, guid: e8df450615de4344d9f0f4eb08cd5cb9, type: 3}
+    - target: {fileID: 2663596767506065400, guid: 1544f5a0906e0a14e9dd2719ea7df136, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 2663596767506065400, guid: 1544f5a0906e0a14e9dd2719ea7df136, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.317
+      objectReference: {fileID: 0}
+    - target: {fileID: 2663596767506065400, guid: 1544f5a0906e0a14e9dd2719ea7df136, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.485
+      objectReference: {fileID: 0}
     - target: {fileID: 5527370226668544547, guid: 1544f5a0906e0a14e9dd2719ea7df136, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5527370226668544547, guid: 1544f5a0906e0a14e9dd2719ea7df136, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5527370226668544547, guid: 1544f5a0906e0a14e9dd2719ea7df136, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5527370226668544547, guid: 1544f5a0906e0a14e9dd2719ea7df136, type: 3}
       propertyPath: m_LocalPosition.x
@@ -90,6 +114,6 @@ PrefabInstance:
     - target: {fileID: 6224351073747418654, guid: 1544f5a0906e0a14e9dd2719ea7df136, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 271b08864de3c9b49ab7e14a9f536bc0, type: 3}
+      objectReference: {fileID: -1712881628, guid: e8df450615de4344d9f0f4eb08cd5cb9, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1544f5a0906e0a14e9dd2719ea7df136, type: 3}

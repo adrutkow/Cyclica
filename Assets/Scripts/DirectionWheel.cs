@@ -24,7 +24,8 @@ public class DirectionWheel : MonoBehaviour
     public void MoveToTile(Tile tile)
     {
         gameObject.SetActive(true);
-        Vector3 pixelOffset = new Vector3(-4 * Utils.PIXEL_SIZE, 4 * Utils.PIXEL_SIZE);
+        Vector3 pixelOffset = new Vector3(-8 * Utils.PIXEL_SIZE, 8 * Utils.PIXEL_SIZE);
+        pixelOffset = Vector3.zero;
         transform.position = tile.transform.position + pixelOffset;
     }
 

@@ -46,9 +46,10 @@ public class Animal: Entity
         {
             return false;
         }
-
+        
         return true;
     }
+
 
     public override void DoTurn()
     {

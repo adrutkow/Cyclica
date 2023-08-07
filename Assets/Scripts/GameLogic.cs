@@ -19,6 +19,10 @@ public class GameLogic : MonoBehaviour
     public int turnCount = 0;
     PlayerUI playerUI;
     public GameObject notificationArrow;
+    public Sprite[] TILE_SPRITE;
+    public Sprite[] TILE_NOISE_SPRITE_0;
+    public Sprite[] TILE_NOISE_SPRITE_1;
+
 
     // Start is called before the first frame update
     void Start()
@@ -76,6 +80,12 @@ public class GameLogic : MonoBehaviour
 
     void OnRightClick()
     {
+        if (directionWheel.gameObject.activeSelf)
+        {
+            directionWheel.Hide();
+            return;
+        }
+
         int s = (int)Board.SIZE / 2;
         Camera.main.transform.position = new Vector3(s, s, -10);
     }
@@ -110,7 +120,6 @@ public class GameLogic : MonoBehaviour
             {
                 turnIsValid = false;
                 Instantiate(notificationArrow, e.transform);
-
             }
         }
 
