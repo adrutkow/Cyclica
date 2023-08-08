@@ -12,16 +12,9 @@ public class Plant : Entity
     public int growTime = 8;
     int timePassed = 0;
 
-    // Start is called before the first frame update
     void Start()
     {
         eatenSprite.gameObject.SetActive(false);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public override void OnEaten(Animal animal = null)
@@ -37,7 +30,6 @@ public class Plant : Entity
     public override void DoTurn()
     {
         base.DoTurn();
-        print("did turn");
         if (isCut)
         {
             timePassed++;

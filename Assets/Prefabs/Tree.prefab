@@ -134,9 +134,8 @@ MonoBehaviour:
   x: 0
   y: 0
   isWalkableOn: 0
-  entityType: 3
+  entityType: 4
   direction: 4
-  needsDirection: 0
   FavorEatenReward: 10
   UnfavorEatenReward: 10
 --- !u!210 &4081941484521055832
@@ -149,7 +148,7 @@ SortingGroup:
   m_Enabled: 1
   m_SortingLayerID: 1185307443
   m_SortingLayer: -2
-  m_SortingOrder: 0
+  m_SortingOrder: 1
 --- !u!1 &5974612540746416981
 GameObject:
   m_ObjectHideFlags: 0

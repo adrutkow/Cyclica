@@ -13,34 +13,30 @@ public class GameLogic : MonoBehaviour
     public Board board;
     public static GameLogic gameLogic;
     public Tile currentSelectedTile;
-    GameObject selector;
-    DirectionWheel directionWheel;
     public int ecoCoins;
     public int turnCount = 0;
     PlayerUI playerUI;
     public GameObject notificationArrow;
+    public DirectionWheel directionWheel;
     public Sprite[] TILE_SPRITE;
     public Sprite[] TILE_NOISE_SPRITE_0;
     public Sprite[] TILE_NOISE_SPRITE_1;
 
 
-    // Start is called before the first frame update
     void Start()
     {
-        gameLogic = this;
-        GetAllValues();
         InitiateGame();
-        selector = GameObject.FindGameObjectWithTag("Selector");
-        directionWheel = GameObject.FindGameObjectWithTag("DirectionWheel").GetComponent<DirectionWheel>();
-        playerUI = GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<PlayerUI>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         InputManager();
+    }
 
-
+    public void InitiateGame()
+    {
+        SetAllValues();
+        BuildLevel0();
     }
 
     private void InputManager()
@@ -59,7 +55,6 @@ public class GameLogic : MonoBehaviour
         {
             OnRightClick();
         }
-
     }
 
     void OnLeftClick()
@@ -69,7 +64,6 @@ public class GameLogic : MonoBehaviour
             directionWheel.OnClicked();
             return;
         }
-
 
         RaycastHit2D[] hits = Utils.GetClickedElements("Tile");
         if (hits.Length > 0)
@@ -99,27 +93,18 @@ public class GameLogic : MonoBehaviour
         }
         turnCount++;
     }
+
     public bool PlayTurn()
     {
-        List<Entity> entities = new List<Entity>();
+        List<Entity> entities = board.GetAllEntities();
         bool turnIsValid = true;
-        for (int y = 0; y < Board.SIZE; y++)
-        {
-            for (int x = 0; x < Board.SIZE; x++)
-            {
-                if (board.animalsBoard[x, y] != null) entities.Add(board.animalsBoard[x, y]);
-                if (board.entitiesBoard[x, y] != null) entities.Add(board.entitiesBoard[x, y]);
-            }
-        }
-
-
 
         foreach (Entity e in entities)
         {
             if (!e.CanDoTurn())
             {
                 turnIsValid = false;
-                Instantiate(notificationArrow, e.transform);
+                Instantiate(notificationArrow, e.transform.position, e.transform.rotation);
             }
         }
 
@@ -136,22 +121,30 @@ public class GameLogic : MonoBehaviour
             e.OnTurnEnd();
         }
 
-        directionWheel.Hide();
-
+        OnTurnEnd();
         return true;
     }
 
-    void GetAllValues()
+    void OnTurnEnd()
     {
+        foreach(GameObject g in GameObject.FindGameObjectsWithTag("NotificationArrow"))
+        {
+            g.GetComponent<NotificationArrow>().KillSelf();
+        }
+
+        directionWheel.Hide();
+    }
+
+    void SetAllValues()
+    {
+        ecoCoins = 0;
+        gameLogic = this;
+        playerUI = GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<PlayerUI>();
         GameObject t = Instantiate(boardPrefab);
         board = t.GetComponent<Board>();
     }
 
-    public void InitiateGame()
-    {
-        ecoCoins = 0;
-        BuildLevel0();
-    }
+
 
     void BuildLevel0()
     {
@@ -180,20 +173,8 @@ public class GameLogic : MonoBehaviour
 
         if (tile.GetEntity() != null)
         {
-            if (tile.GetEntity().entityType == ENTITY_TYPE.HOME)
+            if (tile.GetEntity().NeedsDirection())
             {
-                if (tile.GetEntity().GetComponent<Home>().isFirstTurn)
-                {
-                    directionWheel.MoveToTile(tile);
-                }
-            }
-        }
-
-        if (tile.GetAnimal() != null)
-        {
-            if (tile.GetAnimal().NeedsDirection())
-            {
-                directionWheel.MoveToTile(tile);
                 tile.isChoosingDirectionThisTurn = true;
             }
 
@@ -201,8 +182,16 @@ public class GameLogic : MonoBehaviour
             {
                 directionWheel.MoveToTile(tile);
             }
+        }
 
-            if (tile.GetAnimal().isWild)
+        if (tile.GetAnimal() != null)
+        {
+            if (tile.GetAnimal().NeedsDirection())
+            {
+                tile.isChoosingDirectionThisTurn = true;
+            }
+
+            if (tile.isChoosingDirectionThisTurn)
             {
                 directionWheel.MoveToTile(tile);
             }

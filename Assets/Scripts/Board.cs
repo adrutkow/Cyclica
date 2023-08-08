@@ -10,18 +10,6 @@ public class Board : MonoBehaviour
     public Animal[,] animalsBoard = new Animal[SIZE, SIZE];
     public Entity[,] entitiesBoard = new Entity[SIZE, SIZE];
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void BuildBoard(int s=10)
     {
         SIZE = s;
@@ -179,6 +167,33 @@ public class Board : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public List<Entity> GetAllEntities()
+    {
+        List<Entity> entities = new List<Entity>();
+        for (int y = 0; y < Board.SIZE; y++)
+        {
+            for (int x = 0; x < Board.SIZE; x++)
+            {
+                if (animalsBoard[x, y] != null) entities.Add(animalsBoard[x, y]);
+                if (entitiesBoard[x, y] != null) entities.Add(entitiesBoard[x, y]);
+            }
+        }
+        return entities;
+    }
+
+    public List<Animal> GetAllAnimals()
+    {
+        List<Animal> animals = new List<Animal>();
+        for (int y = 0; y < SIZE; y++)
+        {
+            for (int x = 0; x < SIZE; x++)
+            {
+                if (animalsBoard[x, y] != null) animals.Add(animalsBoard[x, y]);
+            }
+        }
+        return animals;
     }
 
 }

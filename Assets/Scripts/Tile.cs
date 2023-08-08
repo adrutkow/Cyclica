@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Tile : MonoBehaviour
@@ -8,7 +9,6 @@ public class Tile : MonoBehaviour
     public int x;
     public int y;
     public Utils.DIRECTION direction = Utils.DIRECTION.NONE;
-    public bool needsDirection = false;
     public bool isChoosingDirectionThisTurn = false;
     public GameObject[] directionArrows;
     public SpriteRenderer tileNoiseSprite;
@@ -30,6 +30,7 @@ public class Tile : MonoBehaviour
             noise_sprite = GameLogic.gameLogic.TILE_NOISE_SPRITE_1[r];
         }
 
+        GetComponent<SpriteMask>().sprite = null;
         GetComponent<SpriteRenderer>().sprite = sprite;
         tileNoiseSprite.sprite = noise_sprite;
     }
@@ -73,6 +74,7 @@ public class Tile : MonoBehaviour
             arrow.SetActive(false);
         }
         if (d == Utils.DIRECTION.NONE) return;
+        HideHighlight();
         directionArrows[(int)d].SetActive(true);
     }
 
@@ -83,7 +85,18 @@ public class Tile : MonoBehaviour
 
     public bool NeedsDirection()
     {
-        return needsDirection;
+        return GetDirection() == Utils.DIRECTION.NONE;
+    }
+
+    public void ShowHighlight()
+    {
+        print("SHOWING HIGLIGHJT");
+        GetComponent<SpriteMask>().sprite = GetComponent<SpriteRenderer>().sprite;
+    }
+
+    public void HideHighlight()
+    {
+        GetComponent<SpriteMask>().sprite = null;
     }
 
 

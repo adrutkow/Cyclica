@@ -12,7 +12,7 @@ public class Home : Entity
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -34,9 +34,8 @@ public class Home : Entity
             
             if (GameLogic.gameLogic.board.IsAnimalsBoardSpotOccupied(x + 0, y + 0)) return;
             Animal newAnimal = GameLogic.gameLogic.board.AddAnimal(x + 0, y + 0, ANIMAL_TYPE.SHEEP);
-
             if (newAnimal != null) outInWild = newAnimal;
-            newAnimal.direction = GetDirection();
+            newAnimal.SetDirection(GetDirection());
             newAnimal.SetHome(this);
         }
     }
@@ -47,10 +46,10 @@ public class Home : Entity
         isFirstTurn = false;
     }
 
-    public Utils.DIRECTION GetDirection()
+    public override Utils.DIRECTION GetDirection()
     {
-        //if (GameLogic.gameLogic.board.GetTileAt(x, y).direction == null) return null;
-        return GameLogic.gameLogic.board.GetTileAt(x, y).direction;
+        NeedsDirection();
+        return direction;
     }
 
     public override bool CanDoTurn()
@@ -58,7 +57,7 @@ public class Home : Entity
         return !NeedsDirection();
     }
 
-    public bool NeedsDirection()
+    public override bool NeedsDirection()
     {
         Utils.DIRECTION tileDirection = GameLogic.gameLogic.board.GetTileAt(x, y).GetDirection();
         if (tileDirection != Utils.DIRECTION.NONE)
@@ -77,8 +76,5 @@ public class Home : Entity
         {
             Kill();
         }
-
     }
-
-
 }

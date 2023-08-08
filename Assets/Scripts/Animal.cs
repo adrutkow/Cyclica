@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Xml;
 using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.EventSystems.EventTrigger;
@@ -9,7 +10,6 @@ using static UnityEngine.EventSystems.EventTrigger;
 public class Animal: Entity
 {
     public ANIMAL_TYPE animalType;
-    public bool isWild = true;
     public List<ANIMAL_TYPE> animalLovesEating;
     public List<ANIMAL_TYPE> animalHatesEating;
     public List<ENTITY_TYPE> entityLovesEating;
@@ -18,6 +18,7 @@ public class Animal: Entity
     public int defaultStarveTime = 32;
     public int eatenAmount = 0;
     int starveTime;
+    public bool isWild;
 
 
     // Start is called before the first frame update
@@ -25,13 +26,6 @@ public class Animal: Entity
     {
         starveTime = defaultStarveTime;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
 
     public override bool CanDoTurn()
     {
@@ -67,7 +61,6 @@ public class Animal: Entity
         if (GameLogic.gameLogic.board.IsAnimalsBoardSpotOccupied(targetX, targetY)) return;
         GameLogic.gameLogic.board.MoveAnimal(targetX, targetY, this);
         isWild = false;
-        //needsDirection = false;
     }
 
     public override void OnTurnEnd()
@@ -79,8 +72,17 @@ public class Animal: Entity
         }
 
         CheckIfSteppedIntoOwnHome();
-
         TryEat();
+        UpdateTileHighlight();
+    }
+
+
+    public override void UpdateTileHighlight()
+    {
+        if (NeedsDirection())
+        {
+            GetTile().ShowHighlight();
+        }
     }
 
     public void CheckIfSteppedIntoOwnHome()
@@ -145,25 +147,27 @@ public class Animal: Entity
 
     public void TryEatAnimal(List<ANIMAL_TYPE> animalList)
     {
-        for (int iy = -1; iy < 2; iy++)
+        int[][] offsets = {
+            new int[]{0, 1},   // UP
+            new int[]{0, -1},  // DOWN
+            new int[]{-1, 0},  // LEFT
+            new int[]{1, 0}    // RIGHT
+        };
+
+        foreach (int[] offset in offsets)
         {
-            for (int ix = -1; ix < 2; ix++)
+            int ix = offset[0];
+            int iy = offset[1];
+
+            if (Utils.IsOutOfBounds(x + ix, y + iy)) continue;
+            Animal animal = GameLogic.gameLogic.board.animalsBoard[x + ix, y + iy];
+
+            if (animal != null)
             {
-                //if (ix == 0 && iy == 0) continue;
-                if (ix == iy) continue;
-
-                if (Utils.IsOutOfBounds(x + ix, y + iy)) continue;
-
-                Animal animal = GameLogic.gameLogic.board.animalsBoard[x + ix, y + iy];
-
-                if (animal != null)
+                if (animalList.Contains(animal.animalType))
                 {
-                    if (animalList.Contains(animal.animalType))
-                    {
-                        EatAnimal(animal);
-                    }
+                    EatAnimal(animal);
                 }
-
             }
         }
     }
@@ -181,26 +185,6 @@ public class Animal: Entity
                 if (entityLovesEating.Contains(plant.entityType))
                 {
                     EatEntity(toBeEaten);
-                }
-
-            }
-        }
-        return;
-
-        for (int iy = 0; iy < 3; iy++)
-        {
-            for (int ix = 0; ix < 3; ix++)
-            {
-                if (ix == 1 && iy == 1) continue;
-
-                Entity entity = GameLogic.gameLogic.board.entitiesBoard[x + ix, y + iy];
-
-                if (entity != null)
-                {
-                    if (entityList.Contains(entity.entityType))
-                    {
-                        EatEntity(entity);
-                    }
                 }
 
             }
@@ -253,23 +237,17 @@ public class Animal: Entity
         Kill();
     }
 
-    public void CheckIfNeedsDirection()
+    public override bool NeedsDirection()
     {
-
-    }
-
-    public bool NeedsDirection()
-    {
-        if (needsDirection)
+        print("NEDSDIR");
+        if (direction == Utils.DIRECTION.NONE)
         {
-            if (GetTile().direction != Utils.DIRECTION.NONE)
+            if (GetTile().GetDirection() != Utils.DIRECTION.NONE)
             {
-                SetDirection(GetTile().direction);
-                needsDirection = false;
+                SetDirection(GetTile().GetDirection());
             }
         }
-        if (direction == Utils.DIRECTION.NONE) needsDirection = true;
-        return needsDirection;
+        return direction == Utils.DIRECTION.NONE;
     }
 
     public void ResetDirection()

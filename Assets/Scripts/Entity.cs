@@ -10,7 +10,6 @@ public class Entity : MonoBehaviour
     public bool isWalkableOn = false;
     public ENTITY_TYPE entityType;
     public Utils.DIRECTION direction = Utils.DIRECTION.NONE;
-    public bool needsDirection = false;
     public int FavorEatenReward = 10;
     public int UnfavorEatenReward = 10;
 
@@ -18,13 +17,7 @@ public class Entity : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        UpdateTileHighlight();
     }
 
     public virtual bool CanDoTurn()
@@ -60,8 +53,6 @@ public class Entity : MonoBehaviour
     public virtual void SetDirection(Utils.DIRECTION d)
     {
         direction = d;
-        needsDirection = direction == Utils.DIRECTION.NONE;
-
         NotificationArrow[] arrows = GetComponentsInChildren<NotificationArrow>();
         foreach(NotificationArrow ar in arrows)
         {
@@ -74,10 +65,31 @@ public class Entity : MonoBehaviour
         return GameLogic.gameLogic.board.GetTileAt(x, y);
     }
 
+    public virtual void UpdateTileHighlight()
+    {
+        if (NeedsDirection())
+        {
+            print(entityType + " NEEDS DIRECTION");
+            GetTile().ShowHighlight();
+        }
+    }
+
+    public virtual bool NeedsDirection()
+    {
+        print("XDDD");
+        return false;
+    }
+
+    public virtual Utils.DIRECTION GetDirection()
+    {
+        return direction;
+    }
+
 }
 
 public enum ENTITY_TYPE
 {
+    ANIMAL,
     HOME,
     GRASS_PATCH,
     CARROT_PATCH,

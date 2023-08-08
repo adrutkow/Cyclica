@@ -67,7 +67,7 @@ public class Utils : MonoBehaviour
 
     public static int[] GetCoordinatesTorwardsDirection(Animal animal)
     {
-        return GetCoordinatesTorwardsDirection(animal.x, animal.y, animal.direction);
+        return GetCoordinatesTorwardsDirection(animal.x, animal.y, animal.GetDirection());
     }
 
     /// <summary>

@@ -49,11 +49,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -4079519709351557453, guid: 1544f5a0906e0a14e9dd2719ea7df136, type: 3}
       propertyPath: entityHatesEating.Array.data[0]
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -4079519709351557453, guid: 1544f5a0906e0a14e9dd2719ea7df136, type: 3}
       propertyPath: entityHatesEating.Array.data[1]
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 704983721569038787, guid: 1544f5a0906e0a14e9dd2719ea7df136, type: 3}
       propertyPath: m_Sprite

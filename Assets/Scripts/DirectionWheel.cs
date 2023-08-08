@@ -46,9 +46,6 @@ public class DirectionWheel : MonoBehaviour
 
         }
 
-        print(angle);
-
-
         foreach (SpriteRenderer spriteRenderer in buttonSpriteRenderers)
         {
             spriteRenderer.color = Color.white;
@@ -95,12 +92,12 @@ public class DirectionWheel : MonoBehaviour
 
         if (tile.GetAnimal() != null)
         {
-            if (tile.GetAnimal().isWild)
+/*            if (tile.GetAnimal().isWild)
             {
                 Hide();
                 tile.GetAnimal().SetDirection(arrowDirection);
                 return;
-            }
+            }*/
 
             if (tile.isChoosingDirectionThisTurn)
             {

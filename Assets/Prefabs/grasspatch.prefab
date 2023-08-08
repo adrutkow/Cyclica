@@ -218,9 +218,8 @@ MonoBehaviour:
   x: 0
   y: 0
   isWalkableOn: 1
-  entityType: 1
+  entityType: 2
   direction: 4
-  needsDirection: 0
   FavorEatenReward: 10
   UnfavorEatenReward: 0
   defaultSprite: {fileID: 4940341971758809325}
