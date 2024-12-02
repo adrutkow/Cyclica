@@ -6,13 +6,15 @@ using UnityEngine;
 public class Board : MonoBehaviour
 {
     public GameObject tile;
-    public static int SIZE = 10;
+    public static int SIZE;
     public Animal[,] animalsBoard = new Animal[SIZE, SIZE];
     public Entity[,] entitiesBoard = new Entity[SIZE, SIZE];
 
     public void BuildBoard(int s=10)
     {
         SIZE = s;
+        animalsBoard = new Animal[SIZE, SIZE];
+        entitiesBoard = new Entity[SIZE, SIZE];
         int i = 0;
         Transform parent = transform.GetChild(0);
         for (int y = 0; y < SIZE; y++)

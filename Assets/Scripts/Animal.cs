@@ -234,6 +234,7 @@ public class Animal: Entity
     public override void OnEaten(Animal animal = null)
     {
         base.OnEaten(animal);
+        GetTile().HideHighlight();
         Kill();
     }
 

@@ -354,6 +354,7 @@ GameObject:
   m_Component:
   - component: {fileID: 346928574}
   - component: {fileID: 346928575}
+  - component: {fileID: 346928576}
   m_Layer: 5
   m_Name: ShopUI
   m_TagString: Untagged
@@ -394,6 +395,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5845ce7984783f4491e3b08dd30e4a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &346928576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 346928573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31c2d6cf7619afb409ad590a0e1c4d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &348120225
